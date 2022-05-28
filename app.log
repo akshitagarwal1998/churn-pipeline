@@ -1,0 +1,7 @@
+root - INFO - curdir: /mnt/c/Users/Akshi/Desktop/Churn/pipeline-github
+root - INFO - Model Path S3:serve-model.pkl 
+root - INFO - Attributes Path S3:attributes.txt 
+root - INFO - 28 Attributes being used
+root - INFO - Model Input S3:input_data.csv 
+root - INFO - #2070 Predictions Done
+root - INFO - Results Written to S3: results.csv
