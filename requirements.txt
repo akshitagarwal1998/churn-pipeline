@@ -54,12 +54,7 @@ imbalanced-learn
     # via imblearn
 imblearn
     # via -r requirements.in
-ipykernel==6.13.0
-    # via
-    #   ipywidgets
-    #   notebook
-ipywidgets==7.7.0
-    # via cufflinks
+    
 jedi==0.18.1
     # via ipython
 jinja2==3.1.2
