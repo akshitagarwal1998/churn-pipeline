@@ -1,7 +1,7 @@
 name: Churn-Pred-Pipeline
 on:
   push:
-    branches: [ main ]
+    branches: [ dev ]
 env:
   APPLICATION_NAME: ChurnPipelinev1.2
 
