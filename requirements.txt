@@ -14,6 +14,7 @@ attrs==21.4.0
     # via jsonschema
 backcall==0.2.0
     # via ipython
+boto3
 beautifulsoup4==4.11.1
     # via nbconvert
 bleach==5.0.0
@@ -54,7 +55,6 @@ imbalanced-learn
     # via imblearn
 imblearn
     # via -r requirements.in
-    
 jedi==0.18.1
     # via ipython
 jinja2==3.1.2

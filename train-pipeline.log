@@ -1,0 +1,5 @@
+root - INFO - curdir: /mnt/c/Users/Akshi/Desktop/Churn/churn-pipeline
+root - INFO - Input Data Shape: (7043,21)
+root - INFO - Number of Data points before Oversampling, Counter({0.0: 5174, 1.0: 1869})
+root - INFO - Over Sampling done by SMOTE, Counter({0.0: 5174, 1.0: 5174})
+root - INFO - #8 Model being Trained

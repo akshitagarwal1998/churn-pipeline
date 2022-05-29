@@ -1,0 +1,6 @@
+status: success
+data:
+  - name: John
+    age: 25
+  - name: James
+    age: 29
