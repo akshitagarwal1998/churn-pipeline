@@ -15,6 +15,6 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
       run: |
-        pip3 install -r requirements.txt
+        pip3 install boto3 pickle pandas sklearn
         python serve-script.py
       
