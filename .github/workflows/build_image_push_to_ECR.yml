@@ -30,5 +30,5 @@ jobs:
         ECR_REPOSITORY: ${{ secrets.F }}
         IMAGE_TAG: latest
       run: |
-        docker build -t public.ecr.aws/h4q5t7t3/ecr-churn:$IMAGE_TAG .
-        docker push public.ecr.aws/h4q5t7t3/ecr-churn:$IMAGE_TAG
+        docker build -t $ECR_REGISTRY/churn-cicd:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/churn-cicd:$IMAGE_TAG
