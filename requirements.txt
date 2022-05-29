@@ -18,8 +18,6 @@ beautifulsoup4==4.11.1
     # via nbconvert
 bleach==5.0.0
     # via nbconvert
-category-encoders==2.4.1
-    # via -r requirements.in
 certifi==2022.5.18.1
     # via requests
 cffi==1.15.0
@@ -52,10 +50,14 @@ fonttools==4.33.3
     # via matplotlib
 idna==3.3
     # via requests
-imbalanced-learn==0.9.1
+imbalanced-learn
     # via imblearn
 imblearn
     # via -r requirements.in
+ipykernel==6.13.0
+    # via
+    #   ipywidgets
+    #   notebook
 ipywidgets==7.7.0
     # via cufflinks
 jedi==0.18.1
