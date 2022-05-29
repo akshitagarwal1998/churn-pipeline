@@ -23,3 +23,5 @@ RUN pip3 install boto3
 COPY .  /usr/app/src
 
 CMD [ "python3", "serve-script.py" ]
+
+EXPOSE 8080
