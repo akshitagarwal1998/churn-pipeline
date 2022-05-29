@@ -1,7 +1,7 @@
 name: deploy_endpoint
 on:
   push:
-    branches: [ dev ]
+    branches: [ main ]
 jobs:
   run: 
     runs-on: [ubuntu-latest]
@@ -16,4 +16,4 @@ jobs:
         AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
       run: |
         pip install --no-cache-dir --upgrade awscli pandas boto3 sagemaker requests
-        python serve-script.pu=y
+        python serve-script.py
