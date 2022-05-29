@@ -1,0 +1,14 @@
+root - INFO - curdir: /mnt/c/Users/Akshi/Desktop/Churn/churn-pipeline
+root - INFO - Model Path S3:serve-model.pkl 
+root - INFO - Attributes Path S3:attributes.txt 
+root - INFO - Attribute Used:
+root - INFO - 1 OnlineBackup
+root - INFO - 2 OnlineSecurity
+root - INFO - 3 Contract
+root - INFO - 4 TenureInQuarters
+root - INFO - 5 MonthlyCharges
+root - INFO - 6 TechSupport
+root - INFO - Total 6 Attributes being used
+root - INFO - Model Input S3:test_Data.csv 
+root - INFO - #6 Predictions Done
+root - INFO - Results Written to S3: results.csv

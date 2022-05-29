@@ -1,27 +1,47 @@
 #!/usr/bin/env python
 import os
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import MinMaxScaler,LabelEncoder
 import pandas as pd
 import pickle
 import logging
-# import boto3
-# import botocore
+import boto3
+import datetime
+from datetime import datetime, timedelta,date
+from dateutil.relativedelta import *
 
-logging.basicConfig(level=logging.INFO,filename='app.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO,filename='serve-pipeline.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s')
 logging.info("curdir: %s",os.getcwd())
 
+def convert_tenure_quarters(df,col="tenure"):
+  reference_date = date(2022,5,31)
+  def subtract_months(x):
+    return (reference_date - relativedelta(months=+int(x)))
+
+  df2 = df[col].apply(subtract_months)
+  df3 = pd.to_datetime(df2)
+  df4 = pd.PeriodIndex(df3, freq='Q')
+  return df4.astype(str)
+
 if __name__ == "__main__":
+
+
+    # # S3 client
+    # s3 = boto3.client("s3")
+    # s3.download_file(
+    # Bucket="churn-pred-aksagarw", Key="serve-model.pkl", Filename="serve-model.pkl"
+    # )
+
     # model path S3 locaiton
     model_path = 'serve-model.pkl'
+    sc_path = 'sc.pkl'
     logging.info('Model Path S3:%s ', model_path)
     # load the model from S3 location
     try:
         model = pickle.load(open(model_path, 'rb'))
+        sc = pickle.load(open(sc_path,'rb'))
     except Exception as e:
         logging.error("Model Not Found",exc_info=True)
         exit()
-
-
 
     #prediction attributes s3 location
     model_attributes_path = 'attributes.txt'
@@ -35,32 +55,33 @@ if __name__ == "__main__":
         logging.error("Model Attributes Not Found",exc_info=True)
         exit()
 
-
-    for line in lines:
+    logging.info("Attribute Used:")
+    for ix,line in enumerate(lines):
         line = line.split("\n")
         attributes_list.append(line[0])
+        logging.info("%d %s",ix+1,line[0])
 
-    logging.info('%d Attributes being used', len(attributes_list))
+    logging.info('Total %d Attributes being used', len(attributes_list))
 
     # Input Attributes in CSV Format
     '''
     S3 Location or POST Request for the input data
     '''
 
-    model_input = 'input_data.csv'
+    model_input = 'test_Data.csv'
     logging.info('Model Input S3:%s ', model_input)
     try:
         df_test = pd.read_csv(model_input)
+        df_test["TenureInQuarters"] = convert_tenure_quarters(df_test,"tenure")
     except Exception as e:
         logging.error("Test Inputs are missing!!",exc_info=True)
         exit()
 
-
+    # Pre-Process the test input_data using Standardization/Normalization based on the train data corresponding to the model
+    df_test = df_test.apply(LabelEncoder().fit_transform)
+    # input_data = pd.DataFrame(sc.transform(df_test.values), columns=df_test.columns, index=df_test.index)
     #Selecting the limited columsn for testing
-    input_data = df_test[df_test.columns.intersection(attributes_list)]
-    '''
-    Pre-Process the test input_data using Standardization/Normalization based on the train data corresponding to the model
-    '''
+    input_data = df_test[attributes_list]
 
     #Predict on the input_data
     try:
